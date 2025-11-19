@@ -1,0 +1,44 @@
+﻿@model pe.com.ciberelectrik.mvc.Models.Producto
+
+@{
+    ViewBag.Title = "Habilitar Producto";
+}
+
+<h2 class="text-center">Habilitar Producto</h2>
+
+<h4>¿Estás seguro que deseas habilitar este producto?</h4>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>Código</dt>
+        <dd>@Model.codigo</dd>
+
+        <dt>Nombre</dt>
+        <dd>@Model.nombre</dd>
+
+        <dt>Descripción</dt>
+        <dd>@Model.descripcion</dd>
+
+        <dt>Precio</dt>
+        <dd>@Model.precio.ToString("C")</dd>
+
+        <dt>Cantidad</dt>
+        <dd>@Model.cantidad</dd>
+
+        <dt>Categoría</dt>
+        <dd>@Model.categoria.nombre</dd>
+
+        <dt>Marca</dt>
+        <dd>@Model.marca.nombre</dd>
+
+        <dt>Fecha Ingreso</dt>
+        <dd>@Model.fechaingreso.ToString("dd/MM/yyyy")</dd>
+    </dl>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-success">Habilitar</button>
+    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-secondary" })
+}

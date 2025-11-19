@@ -1,0 +1,44 @@
+﻿@model pe.com.ciberelectrik.mvc.Models.Empleado
+
+@{
+    ViewBag.Title = "Habilitar Empleado";
+}
+
+<h2 class="text-center">Habilitar Empleado</h2>
+
+<h4>¿Estás seguro que deseas habilitar este empleado?</h4>
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>Código</dt>
+        <dd>@Model.codigo</dd>
+
+        <dt>Nombre</dt>
+        <dd>@(Model.nombre + " " + Model.apellidopaterno + " " + Model.apellidomaterno)</dd>
+
+        <dt>Documento</dt>
+        <dd>@Model.numerodocumento</dd>
+
+        <dt>Correo</dt>
+        <dd>@Model.correo</dd>
+
+        <dt>Usuario</dt>
+        <dd>@Model.usuario</dd>
+
+        <dt>Rol</dt>
+        <dd>@Model.rol.nombre</dd>
+
+        <dt>Distrito</dt>
+        <dd>@Model.distrito.nombre</dd>
+
+        <dt>Sexo</dt>
+        <dd>@Model.sexo.nombre</dd>
+    </dl>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-success">Habilitar</button>
+    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-secondary" })
+}

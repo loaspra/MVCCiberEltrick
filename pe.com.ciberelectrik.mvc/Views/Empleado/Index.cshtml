@@ -1,0 +1,69 @@
+﻿@model IEnumerable<pe.com.ciberelectrik.mvc.Models.Empleado>
+
+@{
+    ViewBag.Title = "Empleados";
+}
+
+<h2 class="text-center">Listado de Empleados</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Empleado", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre Completo</th>
+            <th>Documento</th>
+            <th>Correo</th>
+            <th>Usuario</th>
+            <th>Rol</th>
+            <th>Distrito</th>
+            <th>Sexo</th>
+            <th>Estado</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var e in Model)
+        {
+            <tr>
+                <td>@e.codigo</td>
+                <td>@(e.nombre + " " + e.apellidopaterno + " " + e.apellidomaterno)</td>
+                <td>@e.numerodocumento</td>
+                <td>@e.correo</td>
+                <td>@e.usuario</td>
+                <td>@e.rol.nombre</td>
+                <td>@e.distrito.nombre</td>
+                <td>@e.sexo.nombre</td>
+
+                <td>
+                    @if (e.estado)
+                    {
+                        <span class="badge bg-success">Activo</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Inactivo</span>
+                    }
+                </td>
+
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = e.codigo }, new { @class = "btn btn-warning btn-sm" })
+
+                    @if (e.estado)
+                    {
+                        @Html.ActionLink("Eliminar", "Delete", new { id = e.codigo },
+                            new { @class = "btn btn-danger btn-sm", onclick = "return confirm('¿Eliminar empleado?')" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Habilitar", "Enable", new { id = e.codigo },
+                            new { @class = "btn btn-success btn-sm", onclick = "return confirm('¿Habilitar empleado?')" })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<pe.com.ciberelectrik.mvc.Models.Producto>
+
+@{
+    ViewBag.Title = "Productos";
+}
+
+<h2 class="text-center">Listado de Productos</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Producto", "Create", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Categoría</th>
+            <th>Marca</th>
+            <th>Estado</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.codigo</td>
+                <td>@p.nombre</td>
+                <td>@p.descripcion</td>
+                <td>@p.precio.ToString("C")</td>
+                <td>@p.cantidad</td>
+                <td>@p.categoria.nombre</td>
+                <td>@p.marca.nombre</td>
+
+                <td>
+                    @if (p.estado)
+                    {
+                        <span class="badge bg-success">Activo</span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">Inactivo</span>
+                    }
+                </td>
+
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = p.codigo }, new { @class = "btn btn-warning btn-sm" })
+
+                    @if (p.estado)
+                    {
+                        @Html.ActionLink("Eliminar", "Delete", new { id = p.codigo },
+                            new { @class = "btn btn-danger btn-sm", onclick = "return confirm('¿Eliminar producto?')" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Habilitar", "Enable", new { id = p.codigo },
+                            new { @class = "btn btn-success btn-sm", onclick = "return confirm('¿Habilitar producto?')" })
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
