@@ -1,10 +1,9 @@
-﻿using System;
+﻿using pe.com.ciberelectrik.mvc.Models.db;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using pe.com.ciberelectrik.mvc.Models;
-using pe.com.ciberelectrik.mvc.Models.db;
 
 namespace pe.com.ciberelectrik.mvc.Controllers
 {
@@ -18,48 +17,36 @@ namespace pe.com.ciberelectrik.mvc.Controllers
             return View();
         }
 
-        // POST: Inicio/ValidarUsuario
+        //creamos una funcion para validar
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult ValidarUsuario(string usuario, string clave)
         {
-            // Validar que los campos no estén vacíos
-            if (string.IsNullOrEmpty(usuario) || string.IsNullOrEmpty(clave))
+            if (string.IsNullOrEmpty(usuario))
             {
-                ViewBag.Mensaje = "Debe ingresar usuario y clave";
+                ViewBag.Mensaje = "Ingrese el usuario";
                 return View("Index");
             }
-
-            // Buscar el empleado en la base de datos
-            var empleado = db.empleado.FirstOrDefault(e => e.usuario == usuario && e.clave == clave);
-
-            // Validar si existe el empleado y está activo
-            if (empleado == null)
-            {
-                ViewBag.Mensaje = "Usuario o clave incorrectos";
+            else if (string.IsNullOrEmpty(clave)) {
+                ViewBag.Mensaje = "Ingrese la clave";
                 return View("Index");
             }
-
-            if (!empleado.estado)
+            else
             {
-                ViewBag.Mensaje = "Usuario inactivo";
-                return View("Index");
+                //verificamos el usuario y la clave
+                var empleado = db.empleado.FirstOrDefault(
+                    e=> e.usuario==usuario && e.clave==clave
+                    );
+                if (empleado != null) {
+                    //guardamos la sesion
+                    Session["empleado"] = empleado;
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ViewBag.Mensaje = "Usuario o Clave incorrecta";
+                    return View("Index");
+                }
             }
-
-            // Guardar el empleado en sesión
-            Session["empleado"] = empleado;
-
-            // Redirigir al inicio del sistema
-            return RedirectToAction("Index", "Home");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }
