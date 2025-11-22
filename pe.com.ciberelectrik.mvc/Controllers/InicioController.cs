@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using pe.com.ciberelectrik.mvc.Models;
+using pe.com.ciberelectrik.mvc.Models.db;
 
 namespace pe.com.ciberelectrik.mvc.Controllers
 {
