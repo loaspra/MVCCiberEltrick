@@ -20,7 +20,7 @@ namespace pe.com.ciberelectrik.mvc.Controllers
             var lista = db.empleado
                 .Include(e => e.distrito)
                 .Include(e => e.rol)
-                .Include(e => e.tipodocumento)
+                .Include(e => e.TipoDocumento)
                 .Include(e => e.sexo)
                 .ToList();
 
@@ -65,7 +65,7 @@ namespace pe.com.ciberelectrik.mvc.Controllers
             var empleado = db.empleado
                 .Include(e => e.distrito)
                 .Include(e => e.rol)
-                .Include(e => e.tipodocumento)
+                .Include(e => e.TipoDocumento)
                 .Include(e => e.sexo)
                 .FirstOrDefault(e => e.codigo == id);
 
@@ -84,7 +84,7 @@ namespace pe.com.ciberelectrik.mvc.Controllers
             var empleado = db.empleado
                 .Include(e => e.distrito)
                 .Include(e => e.rol)
-                .Include(e => e.tipodocumento)
+                .Include(e => e.TipoDocumento)
                 .Include(e => e.sexo)
                 .FirstOrDefault(e => e.codigo == id);
 
@@ -103,7 +103,7 @@ namespace pe.com.ciberelectrik.mvc.Controllers
             var empleado = db.empleado
                 .Include(e => e.distrito)
                 .Include(e => e.rol)
-                .Include(e => e.tipodocumento)
+                .Include(e => e.TipoDocumento)
                 .Include(e => e.sexo)
                 .FirstOrDefault(e => e.codigo == id);
 
