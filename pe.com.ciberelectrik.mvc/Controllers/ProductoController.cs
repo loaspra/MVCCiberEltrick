@@ -179,7 +179,8 @@ namespace pe.com.ciberelectrik.mvc.Controllers
         // POST: Producto/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int? id)
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirmed(int? id)
         {
             try
             {
@@ -201,7 +202,8 @@ namespace pe.com.ciberelectrik.mvc.Controllers
         // POST: Producto/Enable/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Enable(int? id)
+        [ActionName("Enable")]
+        public ActionResult EnableConfirmed(int? id)
         {
             try
             {
